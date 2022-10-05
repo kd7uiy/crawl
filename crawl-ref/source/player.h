@@ -657,7 +657,6 @@ public:
                        vector<const item_def *> *matches = nullptr) const override;
 
     int infusion_amount() const;
-    int infusion_multiplier() const;
 
     item_def *weapon(int which_attack = -1) const override;
     item_def *shield() const override;
@@ -988,7 +987,7 @@ bool player_effectively_in_light_armour();
 int player_shield_racial_factor();
 int player_armour_shield_spell_penalty();
 
-int player_movement_speed();
+int player_movement_speed(bool check_terrain = true);
 
 int player_icemail_armour_class();
 int player_condensation_shield_class();

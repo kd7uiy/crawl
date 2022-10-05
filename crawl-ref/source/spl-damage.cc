@@ -328,8 +328,12 @@ static bool _warn_about_bad_targets(spell_type spell, vector<coord_def> targets)
 
 spret cast_chain_lightning(int pow, const actor &caster, bool fail)
 {
-    if (caster.is_player() && _warn_about_bad_targets(SPELL_CHAIN_LIGHTNING, chain_lightning_targets()))
+    if (caster.is_player()
+        && _warn_about_bad_targets(SPELL_CHAIN_LIGHTNING,
+                                   chain_lightning_targets()))
+    {
         return spret::abort;
+    }
     // NOTE: it's possible to hit something not in this list by arcing
     // chain lightning through an invisible enemy through an ally. Oh well...
 
@@ -1040,7 +1044,7 @@ spret cast_momentum_strike(int pow, coord_def target, bool fail)
     beam.attitude = ATT_FRIENDLY;
     beam.fire();
 
-    if (!beam.foe_info.hurt) // miss!
+    if (!beam.foe_info.hurt && !beam.friend_info.hurt) // miss!
     {
         if (!mons || !you.can_see(*mons))
             mpr("The momentum dissipates harmlessly.");

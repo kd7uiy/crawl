@@ -1779,13 +1779,13 @@ int player_prot_life(bool allow_random, bool temp, bool items)
 
 // Even a slight speed advantage is very good... and we certainly don't
 // want to go past 6 (see below). -- bwr
-int player_movement_speed()
+int player_movement_speed(bool check_terrain)
 {
     int mv = you.form == transformation::none
         ? 10
         : form_base_movespeed(you.form);
 
-    if (feat_is_water(env.grid(you.pos())))
+    if (check_terrain && feat_is_water(env.grid(you.pos())))
     {
         if (you.get_mutation_level(MUT_NIMBLE_SWIMMER) >= 2)
             mv -= 4;
@@ -1795,8 +1795,11 @@ int player_movement_speed()
 
     // moving on liquefied ground, or while maintaining the
     // effect takes longer
-    if (you.liquefied_ground() || you.duration[DUR_LIQUEFYING])
+    if (check_terrain && (you.liquefied_ground()
+                          || you.duration[DUR_LIQUEFYING]))
+    {
         mv += 3;
+    }
 
     // armour
     if (player_equip_unrand(UNRAND_LIGHTNING_SCALES))
@@ -1827,7 +1830,8 @@ int player_movement_speed()
         mv /= 10;
     }
 
-    if (you.duration[DUR_SWIFTNESS] > 0 && !you.in_liquid())
+    if (you.duration[DUR_SWIFTNESS] > 0 && (!check_terrain
+                                            || !you.in_liquid()))
     {
         if (you.attribute[ATTR_SWIFTNESS] > 0)
           mv = div_rand_round(3*mv, 4);
@@ -3538,12 +3542,6 @@ int player::infusion_amount() const
         return min(you.hp - 1, cost);
     else
         return min(you.magic_points, cost);
-}
-
-/// How much bonus damage do you get per MP spent?
-int player::infusion_multiplier() const {
-    // Maulers are pretty fun as is, but infusion needs a buff.
-    return player_equip_unrand(UNRAND_POWER_GLOVES) ? 2 : 4;
 }
 
 void dec_hp(int hp_loss, bool fatal, const char *aux)
@@ -7219,7 +7217,8 @@ bool player::is_stationary() const
         || you.duration[DUR_LOCKED_DOWN];
 }
 
-bool player::is_motile() const {
+bool player::is_motile() const
+{
     return !is_stationary() && !you.duration[DUR_NO_MOMENTUM];
 }
 

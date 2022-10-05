@@ -50,7 +50,6 @@ static const vector<spell_type> spellbook_templates[] =
 },
 
 {   // Book of Flames
-    SPELL_FOXFIRE,
     SPELL_INNER_FLAME,
     SPELL_STICKY_FLAME,
     SPELL_FLAME_WAVE,
@@ -103,7 +102,6 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_ELECTRIC_CHARGE,
     SPELL_LIGHTNING_BOLT,
     SPELL_ARCJOLT,
-    SPELL_MAXWELLS_COUPLING,
 },
 
 {   // Book of Death
@@ -138,6 +136,7 @@ static const vector<spell_type> spellbook_templates[] =
 {   // Book of Vapours
     SPELL_POISONOUS_VAPOURS,
     SPELL_ROT,
+    SPELL_MEPHITIC_CLOUD,
 },
 
 {   // Book of Necromancy
@@ -220,7 +219,6 @@ static const vector<spell_type> spellbook_templates[] =
 
 {   // Book of Power
     SPELL_BATTLESPHERE,
-    SPELL_ARCJOLT,
     SPELL_IRON_SHOT,
     SPELL_SPELLFORGED_SERVITOR,
 },
@@ -398,7 +396,6 @@ static const vector<spell_type> spellbook_templates[] =
 
 { // Inescapable Atlas
     SPELL_BLINK,
-    SPELL_ELECTRIC_CHARGE,
     SPELL_MANIFOLD_ASSAULT,
     SPELL_STORM_FORM,
 },
@@ -478,7 +475,6 @@ static const vector<spell_type> spellbook_templates[] =
 { // Trismegistus Codex
     SPELL_BLASTSPARK,
     SPELL_IGNITE_POISON,
-    SPELL_MEPHITIC_CLOUD,
     SPELL_FREEZING_CLOUD,
 },
 
@@ -492,6 +488,12 @@ static const vector<spell_type> spellbook_templates[] =
     SPELL_SCORCH,
     SPELL_FLAME_WAVE,
     SPELL_SUMMON_CACTUS,
+},
+
+{ // Maxwell's Memoranda
+    SPELL_ELECTRIC_CHARGE,
+    SPELL_ARCJOLT,
+    SPELL_MAXWELLS_COUPLING,
 },
 
 };
